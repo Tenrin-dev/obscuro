@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obscuro - Premium Code Obfuscation Tool</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00ff9d;
+            --dark-bg: #0a0a0a;
+            --card-bg: #111111;
+            --text-color: #ffffff;
+            --secondary-text: #cccccc;
+            --glow-shadow: 0 0 15px rgba(0, 255, 157, 0.5);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 157, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--dark-bg);
+            font-size: 24px;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 157, 0.5));
+        }
+        
+        .logo span {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 0.5px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .cta-button {
+            background-color: var(--primary-color);
+            color: var(--dark-bg) !important;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            box-shadow: var(--glow-shadow);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        #hero {
+            padding: 180px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 255, 157, 0.15) 0%, transparent 70%);
+            animation: pulse 8s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0.7;
+                transform: scale(1.2);
+            }
+        }
+        
+        .grid-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 255, 157, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 255, 157, 0.1) 1px, transparent 1px);
+        }
+        
+        .animated-line {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            z-index: -1;
+        }
+        
+        .line-1 {
+            top: 30%;
+            animation: move-line 15s linear infinite;
+            opacity: 0.3;
+        }
+        
+        .line-2 {
+            top: 45%;
+            animation: move-line 20s linear infinite reverse;
+            opacity: 0.2;
+        }
+        
+        .line-3 {
+            top: 65%;
+            animation: move-line 25s linear infinite;
+            opacity: 0.1;
+        }
+        
+        @keyframes move-line {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        .floating-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+        }
+        
+        .particle:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-duration: 20s;
+            animation-delay: 0s;
+        }
+        
+        .particle:nth-child(2) {
+            top: 40%;
+            left: 25%;
+            animation-duration: 25s;
+            animation-delay: 2s;
+        }
+        
+        .particle:nth-child(3) {
+            top: 60%;
+            left: 40%;
+            animation-duration: 18s;
+            animation-delay: 4s;
+        }
+        
+        .particle:nth-child(4) {
+            top: 30%;
+            left: 60%;
+            animation-duration: 22s;
+            animation-delay: 6s;
+        }
+        
+        .particle:nth-child(5) {
+            top: 70%;
+            left: 75%;
+            animation-duration: 24s;
+            animation-delay: 8s;
+        }
+        
+        .particle:nth-child(6) {
+            top: 50%;
+            left: 85%;
+            animation-duration: 21s;
+            animation-delay: 10s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(50px, 50px);
+            }
+            50% {
+                transform: translate(0, 100px);
+            }
+            75% {
+                transform: translate(-50px, 50px);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+        
+        #hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fade-up 1s ease-out;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            background: linear-gradient(to right, var(--text-color), var(--primary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        #hero p {
+            font-size: 20px;
+            color: var(--secondary-text);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            animation: fade-up 1s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .price-tag {
+            display: inline-block;
+            background-color: rgba(0, 255, 157, 0.1);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            animation: fade-up 1s ease-out 0.1s forwards;
+            opacity: 0;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: fade-up 1s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+        
+        .primary-button {
+            background-color: var(--primary-color);
+            color: var(--dark-bg);
+            padding: 14px 28px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .primary-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: transform 0.5s;
+            transform: skewX(-15deg);
+        }
+        
+        .primary-button:hover::before {
+            transform: translateX(200%) skewX(-15deg);
+        }
+        
+        .primary-button:hover {
+            box-shadow: var(--glow-shadow);
+            transform: translateY(-2px);
+        }
+        
+        .secondary-button {
+            background-color: transparent;
+            color: var(--text-color);
+            padding: 14px 28px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid var(--secondary-text);
+            transition: all 0.3s;
+        }
+        
+        .secondary-button:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        /* Dashboard Preview */
+        #dashboard {
+            margin-top: 60px;
+            animation: fade-up 1s ease-out 0.4s forwards;
+            opacity: 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .dashboard-preview {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--glow-shadow);
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+        }
+        
+        .dashboard-preview::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 20px rgba(0, 255, 157, 0.3);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .dashboard-preview:hover::after {
+            opacity: 1;
+        }
+        
+        .dashboard-preview img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.5s ease;
+        }
+        
+        .dashboard-preview:hover img {
+            transform: scale(1.02);
+        }
+        
+        /* Features Section */
+        #features {
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+        }
+        
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--secondary-text);
+            max-width: 700px;
+            margin: 30px auto 60px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            height: 250px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0, 255, 157, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow-shadow);
+            border-color: rgba(0, 255, 157, 0.3);
+        }
+        
+        .feature-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+        
+        .feature-card:hover .feature-img {
+            transform: scale(1.1);
+            filter: brightness(0.7);
+        }
+        
+        .feature-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            transition: transform 0.5s ease;
+        }
+        
+        .feature-card:hover .feature-content {
+            transform: translateY(-10px);
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .feature-card p {
+            font-size: 16px;
+            color: var(--secondary-text);
+            margin: 0;
+            text-align: left;
+            opacity: 0;
+            max-height: 0;
+            transition: opacity 0.5s ease, max-height 0.5s ease;
+        }
+        
+        .feature-card:hover p {
+            opacity: 1;
+            max-height: 100px;
+        }
+        
+        /* Platforms Section */
+        #platforms {
+            padding: 120px 0;
+            background-color: rgba(17, 17, 17, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .platform-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            height: 250px;
+            border: 1px solid rgba(0, 255, 157, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow-shadow);
+            border-color: rgba(0, 255, 157, 0.3);
+        }
+        
+        .platform-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .platform-card:hover .platform-img {
+            transform: scale(1.1);
+        }
+        
+        .platform-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .platform-card:hover .platform-overlay {
+            opacity: 1;
+        }
+        
+        .platform-overlay h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .platform-overlay p {
+            color: var(--secondary-text);
+            text-align: center;
+        }
+        
+        /* Benefits Section */
+        #benefits {
+            padding: 120px 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .benefit-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            gap: 15px;
+            transition: transform 0.3s ease;
+            padding: 30px 20px;
+            border-radius: 12px;
+            background-color: rgba(17, 17, 17, 0.3);
+            border: 1px solid transparent;
+            min-height: 220px;
+        }
+        
+        .benefit-item:hover {
+            transform: translateY(-5px);
+            background-color: var(--card-bg);
+            border-color: rgba(0, 255, 157, 0.2);
+        }
+        
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(0, 255, 157, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background-color 0.3s ease;
+        }
+        
+        .benefit-item:hover .benefit-icon {
+            background-color: rgba(0, 255, 157, 0.3);
+        }
+        
+        .benefit-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--primary-color);
+        }
+        
+        .benefit-content h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            transition: color 0.3s ease;
+        }
+        
+        .benefit-item:hover .benefit-content h3 {
+            color: var(--primary-color);
+        }
+        
+        .benefit-content p {
+            color: var(--secondary-text);
+            font-size: 16px;
+            margin: 0 auto;
+            max-width: 280px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--card-bg);
+            padding: 30px 0;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(0, 255, 157, 0.1);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary-color);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--dark-bg);
+            font-size: 18px;
+            filter: drop-shadow(0 0 5px rgba(0, 255, 157, 0.5));
+        }
+        
+        .footer-logo span {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            color: var(--secondary-text);
+            font-size: 14px;
+        }
+        
+        .footer-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .developed-by {
+            color: var(--secondary-text);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .developer-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            filter: drop-shadow(0 0 5px rgba(0, 255, 157, 0.3));
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 157, 0.3);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 157, 0.5);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            #hero h1 {
+                font-size: 36px;
+            }
+            
+            #hero p {
+                font-size: 18px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-left {
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <!-- Logo: 40x40px -->
+                    <div class="logo-icon">O</div>
+                    <span>Obscuro</span>
+                </div>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#platforms">Platforms</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#contact" class="cta-button">Get Started</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="grid-lines"></div>
+        <div class="animated-line line-1"></div>
+        <div class="animated-line line-2"></div>
+        <div class="animated-line line-3"></div>
+        <div class="floating-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="container">
+            <div class="price-tag">$34.99 / Lifetime</div>
+            <h1>Secure Your Code<br>with Obscuro.</h1>
+            <p>Premium code obfuscation with multi-language support, web dashboard, Discord bot integration, and comprehensive protection against reverse engineering.</p>
+            <div class="cta-buttons">
+                <a href="#pricing" class="primary-button">Get Started</a>
+                <a href="#demo" class="secondary-button">See Demo</a>
+            </div>
+            
+            <div id="dashboard">
+                <div class="dashboard-preview">
+                    <!-- Hero/Dashboard Image: 1280x720px -->
+                    <img src="https://placehold.co/1280x720/111111/00ff9d?text=Obscuro+Dashboard" alt="Obscuro Dashboard">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title">Features</h2>
+            <p class="section-subtitle">Protecting your code with effortless, customizable obfuscation tools designed for developers who value security and performance.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <!-- Feature Image: 600x400px -->
+                    <img src="https://placehold.co/600x400/111111/00ff9d?text=Multi-Obfuscator" alt="Multi-Obfuscator Support" class="feature-img">
+                    <div class="feature-content">
+                        <h3>Multi-Obfuscator Support</h3>
+                        <p>Choose from various obfuscation engines like ProGuard, yGuard, and more.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <!-- Feature Image: 600x400px -->
+                    <img src="https://placehold.co/600x400/111111/00ff9d?text=Dark+Mode" alt="Dark Mode Dashboard" class="feature-img">
+                    <div class="feature-content">
+                        <h3>Dark Mode Dashboard</h3>
+                        <p>Work comfortably with a sleek and modern dark interface.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <!-- Feature Image: 600x400px -->
+                    <img src="https://placehold.co/600x400/111111/00ff9d?text=Discord+Bot" alt="Discord Bot" class="feature-img">
+                    <div class="feature-content">
+                        <h3>Discord Bot</h3>
+                        <p>Complete obfuscation tasks and receive updates via Discord.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <!-- Feature Image: 600x400px -->
+                    <img src="https://placehold.co/600x400/111111/00ff9d?text=Java+Version" alt="Java Version Selector" class="feature-img">
+                    <div class="feature-content">
+                        <h3>Java Version Selector</h3>
+                        <p>Target Java 8, 11, 17, or 21 depending on your project needs.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <!-- Feature Image: 600x400px -->
+                    <img src="https://placehold.co/600x400/111111/00ff9d?text=History" alt="Obfuscation History" class="feature-img">
+                    <div class="feature-content">
+                        <h3>Obfuscation History</h3>
+                        <p>Track and manage past obfuscation runs from one place.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <!-- Feature Image: 600x400px -->
+                    <img src="https://placehold.co/600x400/111111/00ff9d?text=Documentation" alt="Documentation" class="feature-img">
+                    <div class="feature-content">
+                        <h3>Knowledgebase and Documentation</h3>
+                        <p>Access detailed guides and troubleshooting resources for smooth setup and management.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="platforms">
+        <div class="container">
+            <h2 class="section-title">Supported Platforms</h2>
+            <p class="section-subtitle">Obscuro works seamlessly with multiple platforms and languages to provide comprehensive protection for all your code.</p>
+            <div class="platforms-grid">
+                <div class="platform-card">
+                    <!-- Platform Image: 600x400px -->
+                    <img src="https://placehold.co/600x400/111111/00ff9d?text=Minecraft" alt="Minecraft Plugins" class="platform-img">
+                    <div class="platform-overlay">
+                        <h3>Minecraft Plugins</h3>
+                        <p>Obfuscate Minecraft Java plugins, mods, and server software to make your code unreadable and hard to reverse-engineer.</p>
+                    </div>
+                </div>
+                <div class="platform-card">
+                    <!-- Platform Image: 600x400px -->
+                    <img src="https://placehold.co/600x400/111111/00ff9d?text=Discord" alt="Discord Bots" class="platform-img">
+                    <div class="platform-overlay">
+                        <h3>Discord Bots</h3>
+                        <p>Protect your Java-made Discord bots by making the code unreadable - Python support coming soon.</p>
+                    </div>
+                </div>
+                <div class="platform-card">
+                    <!-- Platform Image: 600x400px -->
+                    <img src="https://placehold.co/600x400/111111/00ff9d?text=Desktop" alt="Run It Locally" class="platform-img">
+                    <div class="platform-overlay">
+                        <h3>Run It Locally</h3>
+                        <p>Run Obscuro as a desktop app on Windows and macOS. No hosting needed.</p>
+                    </div>
+                </div>
+                <div class="platform-card">
+                    <!-- Platform Image: 600x400px -->
+                    <img src="https://placehold.co/600x400/111111/00ff9d?text=Web" alt="Web Applications" class="platform-img">
+                    <div class="platform-overlay">
+                        <h3>Web Applications</h3>
+                        <p>Obfuscate JavaScript web applications to secure your code - JavaScript support coming soon.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits">
+        <div class="container">
+            <h2 class="section-title">Secure your products effortlessly</h2>
+            <p class="section-subtitle">Obscuro provides powerful tools that make code protection simple, efficient, and reliable.</p>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <!-- SVG Icon: 28x28px -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Multi-Obfuscator Support</h3>
+                        <p>Choose from popular obfuscation engines like ProGuard, yGuard, and more.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <!-- SVG Icon: 28x28px -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Dark Mode Dashboard</h3>
+                        <p>Work comfortably with a sleek and modern dark interface.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <!-- SVG Icon: 28x28px -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Download Previous Builds</h3>
+                        <p>Re-download any previously obfuscated file with ease.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <!-- SVG Icon: 28x28px -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Main Package Configuration</h3>
+                        <p>Fast REST-ful License API with Java and other popular language wrappers.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <!-- SVG Icon: 28x28px -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M23 4v6h-6"></path>
+                            <path d="M1 20v-6h6"></path>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                        </svg>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Asynchronous Processing</h3>
+                        <p>Queue and process multiple jobs without blocking your workflow.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <!-- SVG Icon: 28x28px -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Knowledgebase and Documentation</h3>
+                        <p>Access detailed guides and troubleshooting resources.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <!-- Footer Logo: 32x32px -->
+                        <div class="footer-logo-icon">O</div>
+                        <span>Obscuro</span>
+                    </div>
+                    <p class="copyright">© <script>document.write(new Date().getFullYear())</script> Obscuro. All rights reserved.</p>
+                </div>
+                <div class="footer-right">
+                    <p class="developed-by">
+                        Developed by 
+                        <!-- Developer Logo: 32x32px -->
+                        <img src="https://placehold.co/32x32/00ff9d/111111?text=D" alt="Developer Logo" class="developer-logo">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Offset for header
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
